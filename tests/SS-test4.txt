@@ -1,0 +1,28 @@
+.data
+.align 8
+.byte 2,3,0x1
+w: .skip 2
+.equ k, w + 3
+.section novasekcija rw
+.byte k+w
+.skip 10
+c: .word c
+niz: .byte 4,c,w
+.text
+	push c
+a:	jmp c
+	int 10
+	add r3,*150
+		div r4,2
+	mul r4,niz
+	jgt $a
+	cmp r3,3
+	jeq a
+	jmp $z
+.section druga rwx
+.skip 10
+z: push sp
+push pc
+call a
+.bss
+.end

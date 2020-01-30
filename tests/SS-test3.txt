@@ -1,0 +1,32 @@
+.data
+.word a,b+1
+b: .byte 8,0x02,0x05,9,12
+.skip 4
+c: .equ d, a
+.section sekcija x
+int 20
+and r1,r3
+shl r1,2
+shr r3,0x4
+pop r3
+push sp
+mov sp,0x100
+mov sp[0],c
+mov sp[2],15
+pop sp
+xor r3,d
+mul r1,d
+jmp $prog
+.text
+pop psw
+prog: mov r1,&b
+add r1,4
+push r1
+pop r2
+sub r2,0x0b
+	a: push r1
+	.section writable
+	.skip 4
+	.align 8
+.byte 15,0xff,d+3
+.end

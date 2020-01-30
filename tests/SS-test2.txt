@@ -1,0 +1,29 @@
+.data
+.extern C
+.global gl,zl
+bytes: .byte 13, 0xa0, 22,0x04
+.skip 4
+.text
+.equ j, bytes + 5
+mov r1[3], r2[0]
+prog: mov r3, *100
+add r4,r3
+mov r3, *0xF0F1
+add r3, C
+ret
+.section nova rwx
+push j
+.equ k,labela
+.equ z,k+1
+push r1
+labela:
+jmp $bytes
+push sp
+push psw
+call $prog
+zl: mov r1,0x1F
+sub r2,zl
+.bss
+.skip 4
+gl: .skip 6
+.end

@@ -1,0 +1,29 @@
+.data
+.word A
+.byte 0x5,3
+.extern f
+.global G
+A: .skip 2
+.text
+mov r1,3
+push r1
+addb r2l,0x2
+.equ b,A-1
+sub r3,f
+loop:
+add r1,1
+cmp r1,5
+jeq $loop
+.align 4
+push G
+.equ U,G-1
+.byte G - U
+.bss
+.skip 2
+G: .skip 8
+.section sekc2
+or r1 r2
+iret
+.end
+
+
